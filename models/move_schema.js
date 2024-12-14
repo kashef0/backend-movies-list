@@ -1,3 +1,4 @@
+const { description } = require("@hapi/joi/lib/base");
 const { type } = require("@hapi/joi/lib/extend");
 const { string, required, boolean } = require("joi");
 const mongoose = require("mongoose");
@@ -13,6 +14,11 @@ const Movie_Schema = new schema ({
     priority: {
         type: Number,
         required: true,
+    },
+    description: {
+        type: String,
+        required: true,
+        trim: true
     },
     is_watched: {
         type: Boolean,

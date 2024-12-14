@@ -35,7 +35,7 @@ const MovieControllers = {
     async createMovie(request, h) {
         try {
             // tar payload som skickas med begäran från klienten
-            const { movie, priority, is_watched } = request.payload;
+            const { movie, priority, description, is_watched } = request.payload;
 
             const existMovie = await movieModel.find();
             const movieExists  = existMovie.find(el => el.movie === movie);
@@ -46,7 +46,7 @@ const MovieControllers = {
                 return h.response({error: `Den filmen: ${movieExists.movie} finns redan, försök något annan.`}).code(406);;
             }
             // Skapa en ny instans av movieModel med de data som skickades in i förfrågan
-            const addMovie = new movieModel({ movie, priority, is_watched });
+            const addMovie = new movieModel({ movie, priority, description, is_watched });
             await addMovie.save();  // Spara den nya filmen i databasen
             return h.response({addMovie, message: `Filmen med namn: ${movie} har skapats!`}); // returnera ett svar Om filmen skapas framgångsrikt
         } catch (error) {
@@ -73,10 +73,10 @@ const MovieControllers = {
         const { id } = request.params; // Hämtar id från URL parametrarna
         try {
             
-            const { movie, priority, is_watched } = request.payload; // Hämtar de uppdaterade värdena för filmen från klientens request-body
+            const { movie, priority, description, is_watched } = request.payload; // Hämtar de uppdaterade värdena för filmen från klientens request-body
 
             // ID och data för filmen som ska uppdateras och sedan retunera uppdaterade filmen efter ändringen
-            const updatedMovie = await movieModel.findByIdAndUpdate(id, { movie, priority, is_watched }, { runValidators: true, new: true });
+            const updatedMovie = await movieModel.findByIdAndUpdate(id, { movie, priority, description, is_watched }, { runValidators: true, new: true });
 
             if (!updatedMovie) {
                 return h.response({ error: 'Fel vid uppdatering av movie' }).code(404);

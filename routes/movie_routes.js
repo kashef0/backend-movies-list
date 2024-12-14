@@ -23,6 +23,7 @@ const routes = [
                 payload: Joi.object({
                     movie: Joi.string().min(1).required(),
                     priority: Joi.number().greater(0).less(11).required(),
+                    description: Joi.string().min(5).required(),
                     is_watched: Joi.boolean().default(false)
                 }),failAction: (request, h, error) => { // felhantering vid valideringsfel
                     return error.isJoi ? h.response(error.details[0]).takeover() : h.response(error).takeover(); 
@@ -40,6 +41,7 @@ const routes = [
                 payload: Joi.object({
                     movie: Joi.string().min(1).required(),
                     priority: Joi.number().greater(0).less(11).required(),
+                    description: Joi.string().min(1).required(),
                     is_watched: Joi.boolean().default(false)
                 }),failAction: (request, h, error) => {
                     return h.response({ error: error.details[0].message }).code(400).takeover();
