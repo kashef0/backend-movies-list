@@ -9,10 +9,10 @@ const init = async () => {
     // Skapar en ny Hapi-serverinstans med konfiguration
     const server = Hapi.server({
         port: 3000,
-        host: 'localhost',
+        host: '0.0.0.0',
         routes: {
             cors: {
-                origin: ['http://localhost:3000/'],
+                origin: ['http://localhost:3000', 'https://backend-movies-list.onrender.com'],
                 credentials: true,
                 maxAge: 43200,
                 headers: ["headers", "Access-Control-Allow-Origin"]
