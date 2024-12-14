@@ -9,7 +9,7 @@ const init = async () => {
     // Skapar en ny Hapi-serverinstans med konfiguration
     const server = Hapi.server({
         port: 3000,
-        host: '0.0.0.0',
+        host: 'localhost',
         routes: {
             cors: {
                 origin: ['http://localhost:3000/'],
