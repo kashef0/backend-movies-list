@@ -12,10 +12,10 @@ const init = async () => {
         host: '0.0.0.0',
         routes: {
             cors: {
-                origin: ['https://backend-movies-list.onrender.com'],
+                origin: ['*'],
                 credentials: true,
                 maxAge: 43200,
-                headers: ["headers", "Access-Control-Allow-Origin"]
+                headers: ['Content-Type', 'Authorization', 'X-Requested-With']
             }
         }
     });
